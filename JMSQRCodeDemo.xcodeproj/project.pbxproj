@@ -16,6 +16,8 @@
 		1A8884E01E75A9B500D97EA4 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A8884D91E75A9B500D97EA4 /* Info.plist */; };
 		1A8884E21E75A9B500D97EA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884DB1E75A9B500D97EA4 /* ViewController.swift */; };
 		1A8884E51E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884E41E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift */; };
+		1A8884EB1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884EA1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift */; };
+		1A8884ED1E76F03700D97EA4 /* JMSScanningQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884EC1E76F03700D97EA4 /* JMSScanningQRCodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		1A8884D91E75A9B500D97EA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A8884DB1E75A9B500D97EA4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A8884E41E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSGenerateQRCodeUtils.swift; sourceTree = "<group>"; };
+		1A8884EA1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningQRCodeUtils.swift; sourceTree = "<group>"; };
+		1A8884EC1E76F03700D97EA4 /* JMSScanningQRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningQRCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				1A8884E41E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift */,
+				1A8884EC1E76F03700D97EA4 /* JMSScanningQRCodeView.swift */,
+				1A8884EA1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift */,
 			);
 			path = JMSQRCode;
 			sourceTree = "<group>";
@@ -276,7 +282,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A8884E21E75A9B500D97EA4 /* ViewController.swift in Sources */,
+				1A8884EB1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift in Sources */,
 				1A8884DC1E75A9B500D97EA4 /* AppDelegate.swift in Sources */,
+				1A8884ED1E76F03700D97EA4 /* JMSScanningQRCodeView.swift in Sources */,
 				1A8884E51E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +536,7 @@
 				1A8884C81E7590C900D97EA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A8884C91E7590C900D97EA4 /* Build configuration list for PBXNativeTarget "JMSQRCodeDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +545,7 @@
 				1A8884CB1E7590C900D97EA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A8884CC1E7590C900D97EA4 /* Build configuration list for PBXNativeTarget "JMSQRCodeDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +554,7 @@
 				1A8884CE1E7590C900D97EA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
