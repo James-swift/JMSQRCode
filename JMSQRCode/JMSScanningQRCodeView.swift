@@ -29,7 +29,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     private(set) var qrLineImageView: UIImageView?
     private var qrLineY: CGFloat       = 0
     var qrLineColor: UIColor           = .clear
-    var qrLineAnimateDuration          = 0.01
+    var qrLineAnimateDuration          = 0.006
     var qrLineImageName                = ""
     var qrLineColorRed: CGFloat        = (9 / 255.0)
     var qrLineColorGreen: CGFloat      = (187 / 255.0)
@@ -143,11 +143,13 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     func startRunning(config: JMScanningQRCodeConfig? = nil) {
-        qrConfig = config
-        
         if qrConfig == nil {
-            /// 默认
-            qrConfig = JMScanningQRCodeConfig.init(qrCodeView: self, delegate: self)
+            if config == nil {
+                /// 默认
+                qrConfig = JMScanningQRCodeConfig.init(qrCodeView: self, delegate: self)
+            }else {
+                qrConfig = config
+            }
         }
         
         qrLineImageView?.isHidden = false

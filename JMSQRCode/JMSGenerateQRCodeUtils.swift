@@ -34,17 +34,19 @@ struct JMSGenerateQRCodeUtils {
     }
     
     /**
-     生成一张普通的或者带有logo的二维码
+     生成一张彩色的或者带有logo的二维码
      
      - parameter string:    传入你要生成二维码的数据
      - parameter imageSize: 生成的二维码图片尺寸
+     - parameter rgbColor:  rgb颜色
+     - parameter bgColor:   背景颜色
      - parameter logoImageName: logo图片名称
      - parameter logoImageSize: logo图片尺寸（注意尺寸不要太大（最大不超过二维码图片的%30），太大会造成扫不出来）
      
      - returns: UIImage
      */
-    static func jms_generateColorQRCode(string: String, imageSize: CGSize, rgbColor: CIColor, logoImageName: String = "", logoImageSize: CGSize = .zero) -> UIImage? {
-        guard let outputImage = self.outputColorImage(string: string, imageSize: imageSize, rgbColor: rgbColor) else {
+    static func jms_generateColorQRCode(string: String, imageSize: CGSize, rgbColor: CIColor, bgColor: CIColor = CIColor.init(red: 1, green: 1, blue: 1), logoImageName: String = "", logoImageSize: CGSize = .zero) -> UIImage? {
+        guard let outputImage = self.outputColorImage(string: string, imageSize: imageSize, rgbColor: rgbColor, backgroundColor: bgColor) else {
             return nil
         }
         

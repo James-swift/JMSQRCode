@@ -21,7 +21,7 @@ class JMSGenerateQRCodeVC: UIViewController {
     func generateQRCode() {
         let size            = CGSize.init(width: 120, height: 120)
         let off: CGFloat    = 30.0
-        let string          = "https://github.com/xiaobs/JMQRCode.git"
+        let string          = "https://github.com/James-swift/JMSQRCode.git"
         let logoName        = "logo"
         let logoSize        = CGSize.init(width: 30, height: 30)
         
@@ -38,7 +38,7 @@ class JMSGenerateQRCodeVC: UIViewController {
                 image = JMSGenerateQRCodeUtils.jms_generateQRCode(string: string, imageSize: size, logoImageName: logoName, logoImageSize: logoSize)
                 originX += size.width + off
             case 2:
-                image = JMSGenerateQRCodeUtils.jms_generateColorQRCode(string: string, imageSize: size, rgbColor: CIColor.init(red: 200.0/255.0, green: 70.0/255.0, blue: 189.0/255.0))
+                image = JMSGenerateQRCodeUtils.jms_generateColorQRCode(string: string, imageSize: size, rgbColor: CIColor.init(red: 200.0/255.0, green: 70.0/255.0, blue: 189.0/255.0), bgColor: CIColor.init(red: 0, green: 0, blue: 0))
                 originY += size.height + off
             case 3:
                 image = JMSGenerateQRCodeUtils.jms_generateColorQRCode(string: string, imageSize: size, rgbColor: CIColor.init(red: 200.0/255.0, green: 70.0/255.0, blue: 189.0/255.0), logoImageName: logoName, logoImageSize: logoSize)

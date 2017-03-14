@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMSQRCodeDemo/JMSQRCode/JMSScanningQRCodeView.swift"
-            timestampString = "511178095.233335"
+            timestampString = "511192209.733037"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "animateQRLine()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMSQRCodeDemo/JMSQRCode/JMSScanningQRCodeView.swift"
-            timestampString = "511178209.626961"
+            timestampString = "511192209.733037"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "animateQRLine()"
             landmarkType = "7">
          </BreakpointContent>

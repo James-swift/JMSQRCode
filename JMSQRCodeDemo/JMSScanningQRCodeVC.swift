@@ -11,6 +11,8 @@ import UIKit
 class JMSScanningQRCodeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private var qrView: JMSScanningQRCodeView?
+    private var firstLoad: Bool = true
+    private var loadView: JMQRCodeLoadView?
     
     private var lightBtn: UIButton = {
         let tempView = UIButton.init(type: .system)
@@ -27,12 +29,12 @@ class JMSScanningQRCodeVC: UIViewController, UIImagePickerControllerDelegate, UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        qrView?.startRunning()
+        self.startRunning()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        qrView?.stopRunning()
+        self.stopRunning()
     }
     
     func setupViews() {
@@ -69,10 +71,40 @@ class JMSScanningQRCodeVC: UIViewController, UIImagePickerControllerDelegate, UI
         lightBtn.addTarget(self, action: #selector(changeLightSwitch), for: .touchUpInside)
         
         view.addSubview(lightBtn)
+        
+        setupLoadView()
+    }
+    
+    func setupLoadView() {
+        if loadView == nil {
+            loadView                   = JMQRCodeLoadView.init(frame: self.view.bounds)
+            loadView!.backgroundColor  = .black
+            
+            self.view.addSubview(loadView!)
+        }
     }
     
     func setupRightBarButtonItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "相册", style: .done, target: self, action: #selector(handleRightBarButtonAction))
+    }
+    
+    func startRunning() {
+        if firstLoad {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                self.firstLoad          = false
+                self.loadView?.isHidden = true
+                self.loadView?.indicatorView.stopAnimating()
+                self.loadView?.removeFromSuperview()
+                
+                self.qrView?.startRunning()
+            })
+        }else {
+            qrView?.startRunning()
+        }
+    }
+
+    func stopRunning() {
+        qrView?.stopRunning()
     }
     
     // MARK: - Event Response
@@ -89,9 +121,10 @@ class JMSScanningQRCodeVC: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func push(type: JMSScanningResultType, result: String) {
-        let resultVC = JMSScanningResultVC()
+        let resultVC        = JMSScanningResultVC()
         resultVC.resultType = type
         resultVC.resultInfo = result
+        
         navigationController?.pushViewController(resultVC, animated: true)
     }
     
