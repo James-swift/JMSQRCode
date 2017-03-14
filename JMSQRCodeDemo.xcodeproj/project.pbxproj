@@ -18,6 +18,9 @@
 		1A8884E51E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884E41E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift */; };
 		1A8884EB1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884EA1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift */; };
 		1A8884ED1E76F03700D97EA4 /* JMSScanningQRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8884EC1E76F03700D97EA4 /* JMSScanningQRCodeView.swift */; };
+		1AD2CA481E77CC8B002934E5 /* JMSGenerateQRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2CA471E77CC8B002934E5 /* JMSGenerateQRCodeVC.swift */; };
+		1AD2CA4A1E77CEEA002934E5 /* JMSScanningQRCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2CA491E77CEEA002934E5 /* JMSScanningQRCodeVC.swift */; };
+		1AD2CA4C1E77D027002934E5 /* JMSScanningResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2CA4B1E77D027002934E5 /* JMSScanningResultVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		1A8884E41E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSGenerateQRCodeUtils.swift; sourceTree = "<group>"; };
 		1A8884EA1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningQRCodeUtils.swift; sourceTree = "<group>"; };
 		1A8884EC1E76F03700D97EA4 /* JMSScanningQRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningQRCodeView.swift; sourceTree = "<group>"; };
+		1AD2CA471E77CC8B002934E5 /* JMSGenerateQRCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSGenerateQRCodeVC.swift; sourceTree = "<group>"; };
+		1AD2CA491E77CEEA002934E5 /* JMSScanningQRCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningQRCodeVC.swift; sourceTree = "<group>"; };
+		1AD2CA4B1E77D027002934E5 /* JMSScanningResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningResultVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,9 @@
 				1A8884D71E75A9B500D97EA4 /* Main.storyboard */,
 				1A8884D91E75A9B500D97EA4 /* Info.plist */,
 				1A8884DB1E75A9B500D97EA4 /* ViewController.swift */,
+				1AD2CA471E77CC8B002934E5 /* JMSGenerateQRCodeVC.swift */,
+				1AD2CA491E77CEEA002934E5 /* JMSScanningQRCodeVC.swift */,
+				1AD2CA4B1E77D027002934E5 /* JMSScanningResultVC.swift */,
 			);
 			path = JMSQRCodeDemo;
 			sourceTree = "<group>";
@@ -282,7 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A8884E21E75A9B500D97EA4 /* ViewController.swift in Sources */,
+				1AD2CA4A1E77CEEA002934E5 /* JMSScanningQRCodeVC.swift in Sources */,
 				1A8884EB1E76E98D00D97EA4 /* JMSScanningQRCodeUtils.swift in Sources */,
+				1AD2CA4C1E77D027002934E5 /* JMSScanningResultVC.swift in Sources */,
+				1AD2CA481E77CC8B002934E5 /* JMSGenerateQRCodeVC.swift in Sources */,
 				1A8884DC1E75A9B500D97EA4 /* AppDelegate.swift in Sources */,
 				1A8884ED1E76F03700D97EA4 /* JMSScanningQRCodeView.swift in Sources */,
 				1A8884E51E75A9DA00D97EA4 /* JMSGenerateQRCodeUtils.swift in Sources */,
@@ -439,6 +451,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 58SDKF7S9Q;
 				INFOPLIST_FILE = JMSQRCodeDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgy.test.JMSQRCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -452,6 +465,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 58SDKF7S9Q;
 				INFOPLIST_FILE = JMSQRCodeDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgy.test.JMSQRCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";

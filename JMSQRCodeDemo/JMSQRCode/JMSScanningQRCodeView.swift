@@ -13,11 +13,11 @@ private let jm_qr_cornerLineOffX: CGFloat = 0.7
 private let jm_qr_cornerLineOffY: CGFloat = 0.7
 private let jm_qr_scanLineOffY: CGFloat   = 2.0
 
-class JMSScanningQRCodeView : UIView {
+class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     
     /// 透明区域
     var transparentArea: CGSize = .zero {
-        willSet {
+        didSet {
             scaMaxBorder = transparentOriginY + (transparentArea.height - jm_qr_scanLineOffY * 2);
         }
     }
@@ -27,15 +27,25 @@ class JMSScanningQRCodeView : UIView {
     
     /// 扫描动画线条相关
     private(set) var qrLineImageView: UIImageView?
+    private var qrLineY: CGFloat       = 0
     var qrLineColor: UIColor           = .clear
-    var qrLineAnimateDuration: CGFloat = 0.01
+    var qrLineAnimateDuration          = 0.01
     var qrLineImageName                = ""
-    var qrLineSize: CGSize             = .zero
     var qrLineColorRed: CGFloat        = (9 / 255.0)
     var qrLineColorGreen: CGFloat      = (187 / 255.0)
     var qrLineColorBlue: CGFloat       = (7 / 255.0)
     var qrLineColorAlpha: CGFloat      = 1.0
-    var qrLineY: CGFloat               = 0
+    var qrLineSize: CGSize             = .zero {
+        didSet {
+            if qrLineImageView != nil {
+                var frame = qrLineImageView!.frame
+                frame.size.height = qrLineSize.height
+                frame.origin.x = (self.frame.width - qrLineSize.width) / 2
+                
+                qrLineImageView?.frame = frame
+            }
+        }
+    }
 
     /// 边角线条长度，默认15
     var cornerLineLength: CGFloat      = 15
@@ -45,14 +55,44 @@ class JMSScanningQRCodeView : UIView {
 
     /// 是否扫描结束
     private var isScanResult           = false
+    
+    /// 配置
+    private(set) var qrConfig: JMScanningQRCodeConfig?
+    
+    /// 计时器
+    private var timer: Timer?
+    
+    /// 扫描结果
+    var scanningQRCodeResult: ((_ result: String)->())?
+    
+    /// 打开照明
+    var openSystemLight: Bool = false {
+        didSet {
+            if qrConfig?.device != nil  && (qrConfig?.device?.hasTorch)! {
+                try! qrConfig?.device?.lockForConfiguration()
+                
+                if (openSystemLight) {
+                    qrConfig?.device?.torchMode = .on
+                } else {
+                    qrConfig?.device?.torchMode = .off
+                }
+                
+                qrConfig?.device?.unlockForConfiguration()
+            }
+        }
+    }
+    
+    init() {
+        super.init(frame: (UIApplication.shared.keyWindow?.bounds)!)
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         let width               = self.bounds.size.width - self.bounds.size.width * 2 * 0.15
         transparentArea         = .init(width: width, height: width)
-        transparentOriginY      = self.bounds.size.height / 2 - transparentArea.height / 2;
-
+        transparentOriginY      = self.bounds.size.height / 2 - transparentArea.height / 2
+        qrLineSize              = CGSize.init(width: width - 20, height: 2)
+        scaMaxBorder            = transparentOriginY + (transparentArea.height - jm_qr_scanLineOffY * 2)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -93,10 +133,78 @@ class JMSScanningQRCodeView : UIView {
     }
     
     // MARK: - Public
-    func startRunning() {
+    func qrCornerLineColor(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        qrLineColorRed   = red;
+        qrLineColorGreen = green;
+        qrLineColorBlue  = blue;
+        qrLineColorAlpha = alpha;
+        
+        setNeedsDisplay()
+    }
+    
+    func startRunning(config: JMScanningQRCodeConfig? = nil) {
+        qrConfig = config
+        
+        if qrConfig == nil {
+            /// 默认
+            qrConfig = JMScanningQRCodeConfig.init(qrCodeView: self, delegate: self)
+        }
+        
         qrLineImageView?.isHidden = false
         isScanResult              = false
         
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: qrLineAnimateDuration, target: self, selector: #selector(animateQRLine), userInfo: nil, repeats: true)
+            
+            timer?.fire()
+        }
+        
+        qrConfig?.session?.startRunning()
+    }
+    
+    func stopRunning() {
+        qrLineImageView?.isHidden = true
+        
+        var frame               = qrLineImageView?.frame
+        frame?.origin.y         = transparentOriginY + jm_qr_scanLineOffY
+        qrLineImageView?.frame  = frame!
+        
+        timer?.invalidate()
+        timer = nil
+        
+        qrConfig?.session?.stopRunning()
+    }
+    
+    // MARK: - Private
+    func animateQRLine() {
+        UIView.animate(withDuration: qrLineAnimateDuration, animations: { 
+            var rect                    = self.qrLineImageView?.frame
+            rect?.origin.y              = self.qrLineY
+            self.qrLineImageView?.frame = rect!
+        }) { (finished) in
+            if self.qrLineY > self.scaMaxBorder {
+                self.qrLineY = self.transparentOriginY + jm_qr_scanLineOffY
+            }
+            
+            self.qrLineY += 1
+        }
+    }
+    
+    private func handleScanResult(_ result: String) {
+        if isScanResult {
+            return
+        }
+        
+        if result != "" {
+            isScanResult = true
+
+            // 处理扫描结果
+            stopRunning()
+            
+            scanningQRCodeResult?(result)
+        }else {
+            isScanResult = false
+        }
     }
     
     // MARK: - Draw
@@ -175,6 +283,14 @@ class JMSScanningQRCodeView : UIView {
         context.addLines(between: pointB)
     }
     
+    // MARK: - AVCaptureMetadataOutputObjectsDelegate
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+        if metadataObjects != nil && metadataObjects.count != 0 {
+            let metadataObj = metadataObjects[0] as? AVMetadataMachineReadableCodeObject
+            self.handleScanResult(metadataObj?.stringValue ?? "")
+        }
+    }
+    
 }
 
 struct JMScanningQRCodeConfig {
@@ -204,18 +320,26 @@ struct JMScanningQRCodeConfig {
         session = AVCaptureSession()
         session!.sessionPreset = AVCaptureSessionPresetHigh
         
+        if session!.canAddInput(input) {
+            session!.addInput(input)
+        }
+        
+        if session!.canAddOutput(output) {
+            session!.addOutput(output)
+        }
+        
         /// 5.设置扫码支持的编码格式(如下设置条形码和二维码兼容)
         output!.metadataObjectTypes = [AVMetadataObjectTypeQRCode, AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]
         
         /// 6.实例化预览图层
-        preview                            = AVCaptureVideoPreviewLayer.init(session: self.session)
+        preview                             = AVCaptureVideoPreviewLayer.init(session: self.session)
         preview!.videoGravity               = AVLayerVideoGravityResize
         preview!.frame                      = qrCodeView.bounds
         
         qrCodeView.backgroundColor              = .clear
         qrCodeView.superview?.backgroundColor   = .clear
         
-        qrCodeView.superview?.layer.insertSublayer(self.preview!, at: 0)
+        qrCodeView.superview?.layer.insertSublayer(preview!, at: 0)
         
         preview!.connection.videoOrientation = videoOrientationFromCurrentDeviceOrientation()
         

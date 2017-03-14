@@ -32,11 +32,13 @@ struct JMSScanningQRCodeUtils {
             return resultString
         }
         
-        guard let feature = features[0] as? CIQRCodeFeature else {
-            return resultString
+        if features.count != 0 {
+            guard let feature = features[0] as? CIQRCodeFeature else {
+                return resultString
+            }
+            
+            resultString = feature.messageString ?? ""
         }
-        
-        resultString = feature.messageString ?? ""
         
         return resultString
     }
