@@ -16,26 +16,26 @@ private let jm_qr_scanLineOffY: CGFloat   = 2.0
 public class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     
     /// 透明区域
-    var transparentArea: CGSize = .zero {
+    public var transparentArea: CGSize = .zero {
         didSet {
             scaMaxBorder = transparentOriginY + (transparentArea.height - jm_qr_scanLineOffY * 2);
         }
     }
     
     /// 透明的区域起始位置
-    var transparentOriginY: CGFloat    = 0
+    public var transparentOriginY: CGFloat      = 0
     
     /// 扫描动画线条相关
     private(set) var qrLineImageView: UIImageView?
-    private var qrLineY: CGFloat       = 0
-    var qrLineColor: UIColor           = .clear
-    var qrLineAnimateDuration          = 0.006
-    var qrLineImageName                = ""
-    var qrLineColorRed: CGFloat        = (9 / 255.0)
-    var qrLineColorGreen: CGFloat      = (187 / 255.0)
-    var qrLineColorBlue: CGFloat       = (7 / 255.0)
-    var qrLineColorAlpha: CGFloat      = 1.0
-    var qrLineSize: CGSize             = .zero {
+    private var qrLineY: CGFloat                = 0
+    public var qrLineColor: UIColor             = .clear
+    public var qrLineAnimateDuration            = 0.006
+    public var qrLineImageName                  = ""
+    var qrLineColorRed: CGFloat                 = (9 / 255.0)
+    var qrLineColorGreen: CGFloat               = (187 / 255.0)
+    var qrLineColorBlue: CGFloat                = (7 / 255.0)
+    var qrLineColorAlpha: CGFloat               = 1.0
+    public var qrLineSize: CGSize               = .zero {
         didSet {
             if qrLineImageView != nil {
                 var frame = qrLineImageView!.frame
@@ -48,7 +48,7 @@ public class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDeleg
     }
 
     /// 边角线条长度，默认15
-    var cornerLineLength: CGFloat      = 15
+    public var cornerLineLength: CGFloat      = 15
     
     /// 扫描区域最大边界
     private var scaMaxBorder: CGFloat  = 0
@@ -63,10 +63,10 @@ public class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDeleg
     private var timer: Timer?
     
     /// 扫描结果
-    var scanningQRCodeResult: ((_ result: String)->())?
+    public var scanningQRCodeResult: ((_ result: String)->())?
     
     /// 打开照明
-    var openSystemLight: Bool = false {
+    public var openSystemLight: Bool = false {
         didSet {
             if qrConfig?.device != nil  && (qrConfig?.device?.hasTorch)! {
                 try! qrConfig?.device?.lockForConfiguration()
@@ -82,11 +82,11 @@ public class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDeleg
         }
     }
     
-    init() {
+    public init() {
         super.init(frame: (UIApplication.shared.keyWindow?.bounds)!)
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         let width               = self.bounds.size.width - self.bounds.size.width * 2 * 0.15
         transparentArea         = .init(width: width, height: width)
@@ -297,17 +297,17 @@ public class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDeleg
 
 public struct JMScanningQRCodeConfig {
     
-    var device: AVCaptureDevice?
-    var input: AVCaptureDeviceInput?
-    var output: AVCaptureMetadataOutput?
-    var session: AVCaptureSession?
-    var preview: AVCaptureVideoPreviewLayer?
+    private(set) var device: AVCaptureDevice?
+    private(set) var input: AVCaptureDeviceInput?
+    private(set) var output: AVCaptureMetadataOutput?
+    private(set) var session: AVCaptureSession?
+    private(set) var preview: AVCaptureVideoPreviewLayer?
     
-    init(qrCodeView: JMSScanningQRCodeView, delegate: AVCaptureMetadataOutputObjectsDelegate!) {
+    public init(qrCodeView: JMSScanningQRCodeView, delegate: AVCaptureMetadataOutputObjectsDelegate!) {
         qrConfig(qrCodeView: qrCodeView, delegate: delegate)
     }
     
-    mutating func qrConfig(qrCodeView: JMSScanningQRCodeView, delegate: AVCaptureMetadataOutputObjectsDelegate!) {
+    public mutating func qrConfig(qrCodeView: JMSScanningQRCodeView, delegate: AVCaptureMetadataOutputObjectsDelegate!) {
         /// 1.获取摄像头设备
         device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
