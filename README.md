@@ -43,6 +43,9 @@ qrView.backgroundColor = .clear
 qrView.scanningQRCodeResult = { [weak self] (result) in
     print("扫描结果: %@", result)
 }
+
+// 修改四个边角颜色
+qrView.qrCornerLineColor(red: <#red#>, green: <#green#>, blue: <#blue#>, alpha: <#alpha#>)
         
 view.addSubview(qrView)
 ```
