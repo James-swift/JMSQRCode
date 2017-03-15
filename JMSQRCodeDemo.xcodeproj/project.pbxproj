@@ -59,6 +59,7 @@
 		1A8884D81E75A9B500D97EA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A8884D91E75A9B500D97EA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A8884DB1E75A9B500D97EA4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1A8A731C1E79276600ECEB35 /* JMSQRCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMSQRCode.h; sourceTree = "<group>"; };
 		1AD2CA471E77CC8B002934E5 /* JMSGenerateQRCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSGenerateQRCodeVC.swift; sourceTree = "<group>"; };
 		1AD2CA491E77CEEA002934E5 /* JMSScanningQRCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningQRCodeVC.swift; sourceTree = "<group>"; };
 		1AD2CA4B1E77D027002934E5 /* JMSScanningResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JMSScanningResultVC.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		1A3361F61E782DEC006802E7 /* JMSQRCode */ = {
 			isa = PBXGroup;
 			children = (
+				1A8A731C1E79276600ECEB35 /* JMSQRCode.h */,
 				1A3361F71E782DEC006802E7 /* JMSGenerateQRCodeUtils.swift */,
 				1A3361F81E782DEC006802E7 /* JMSScanningQRCodeUtils.swift */,
 				1A3361F91E782DEC006802E7 /* JMSScanningQRCodeView.swift */,
