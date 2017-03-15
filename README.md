@@ -17,11 +17,6 @@ Swift版：iOS原生方法实现二维码生成与扫描(需要iOS8或更高版�
 
 * `可设置扫描样式中动画线条颜色和图片`<br>
 
-## 效果
-![Alt Text](https://github.com/xiaobs/JMShareSource/raw/master/screenshots/Swift/JMSQRCode/1.PNG)
-
-![Alt Text](https://github.com/xiaobs/JMShareSource/raw/master/screenshots/Swift/JMSQRCode/2.PNG)
-
 ## 代码
 
 * 普通二维码生成
@@ -67,6 +62,9 @@ pod 'JMSQRCode', '~> 1.0.0'
 ```OC
 $ pod install
 ```
+
+## 效果
+<img src="https://github.com/xiaobs/JMShareSource/raw/master/screenshots/Swift/JMSQRCode/1.PNG?raw=true"  height="480">  <img src="https://github.com/xiaobs/JMShareSource/raw/master/screenshots/Swift/JMSQRCode/2.PNG?raw=true"  height="480">
 
 ## 联系方式
 
