@@ -13,7 +13,7 @@ private let jm_qr_cornerLineOffX: CGFloat = 0.7
 private let jm_qr_cornerLineOffY: CGFloat = 0.7
 private let jm_qr_scanLineOffY: CGFloat   = 2.0
 
-class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
+public class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     
     /// 透明区域
     var transparentArea: CGSize = .zero {
@@ -95,11 +95,11 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
         scaMaxBorder            = transparentOriginY + (transparentArea.height - jm_qr_scanLineOffY * 2)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         
         if qrLineImageView == nil {
@@ -118,7 +118,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
         qrLineY = qrLineImageView!.frame.origin.y
     }
     
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         if transparentArea.equalTo(.zero) {
             return
         }
@@ -133,7 +133,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     // MARK: - Public
-    func qrCornerLineColor(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    public func qrCornerLineColor(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         qrLineColorRed   = red;
         qrLineColorGreen = green;
         qrLineColorBlue  = blue;
@@ -142,7 +142,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
         setNeedsDisplay()
     }
     
-    func startRunning(config: JMScanningQRCodeConfig? = nil) {
+    public func startRunning(config: JMScanningQRCodeConfig? = nil) {
         if qrConfig == nil {
             if config == nil {
                 /// 默认
@@ -164,7 +164,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
         qrConfig?.session?.startRunning()
     }
     
-    func stopRunning() {
+    public func stopRunning() {
         qrLineImageView?.isHidden = true
         
         var frame               = qrLineImageView?.frame
@@ -286,7 +286,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     }
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    public func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         if metadataObjects != nil && metadataObjects.count != 0 {
             let metadataObj = metadataObjects[0] as? AVMetadataMachineReadableCodeObject
             self.handleScanResult(metadataObj?.stringValue ?? "")
@@ -295,7 +295,7 @@ class JMSScanningQRCodeView : UIView, AVCaptureMetadataOutputObjectsDelegate {
     
 }
 
-struct JMScanningQRCodeConfig {
+public struct JMScanningQRCodeConfig {
     
     var device: AVCaptureDevice?
     var input: AVCaptureDeviceInput?

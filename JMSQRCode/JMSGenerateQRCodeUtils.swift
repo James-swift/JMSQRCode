@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct JMSGenerateQRCodeUtils {
+public struct JMSGenerateQRCodeUtils {
     
     /**
      生成一张普通的或者带有logo的二维码
@@ -21,7 +21,7 @@ struct JMSGenerateQRCodeUtils {
      
      - returns: UIImage
      */
-    static func jms_generateQRCode(string: String, imageSize: CGSize, logoImageName: String = "", logoImageSize: CGSize = .zero) -> UIImage? {
+    public static func jms_generateQRCode(string: String, imageSize: CGSize, logoImageName: String = "", logoImageSize: CGSize = .zero) -> UIImage? {
         guard let outputImage = self.outputNormalImage(string: string, imageSize: imageSize) else {
             return nil
         }
@@ -45,7 +45,7 @@ struct JMSGenerateQRCodeUtils {
      
      - returns: UIImage
      */
-    static func jms_generateColorQRCode(string: String, imageSize: CGSize, rgbColor: CIColor, bgColor: CIColor = CIColor.init(red: 1, green: 1, blue: 1), logoImageName: String = "", logoImageSize: CGSize = .zero) -> UIImage? {
+    public static func jms_generateColorQRCode(string: String, imageSize: CGSize, rgbColor: CIColor, bgColor: CIColor = CIColor.init(red: 1, green: 1, blue: 1), logoImageName: String = "", logoImageSize: CGSize = .zero) -> UIImage? {
         guard let outputImage = self.outputColorImage(string: string, imageSize: imageSize, rgbColor: rgbColor, backgroundColor: bgColor) else {
             return nil
         }

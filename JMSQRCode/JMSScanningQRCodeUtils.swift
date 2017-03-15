@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Photos
 
-struct JMSScanningQRCodeUtils {
+public struct JMSScanningQRCodeUtils {
     
     /**
      获取图片包含的二维码信息
@@ -19,7 +19,7 @@ struct JMSScanningQRCodeUtils {
      
      - returns: UIImage
      */
-    static func jm_scanQRCodeFromPhotosAlbum(_ image: UIImage) -> String {
+    public static func jm_scanQRCodeFromPhotosAlbum(_ image: UIImage) -> String {
         var resultString = ""
         
         guard let ciimage = CIImage.init(image: image) else {
@@ -51,7 +51,7 @@ struct JMSScanningQRCodeUtils {
 
      - returns: Void
      */
-    static func jm_cameraAuthStatus(success: (()->())?, failure: (()->())?) {
+    public static func jm_cameraAuthStatus(success: (()->())?, failure: (()->())?) {
         if let _ = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) {
             let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
             
@@ -93,7 +93,7 @@ struct JMSScanningQRCodeUtils {
      
      - returns: Void
      */
-    static func jm_albumAuthStatus(success: (()->())?, failure: (()->())?) {
+    public static func jm_albumAuthStatus(success: (()->())?, failure: (()->())?) {
         if let _ = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) {
             let status = PHPhotoLibrary.authorizationStatus()
             
